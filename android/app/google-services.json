@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1071008491671",
+    "project_id": "ic-task",
+    "storage_bucket": "ic-task.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071008491671:android:d0b47e0f622f65680fa1d2",
+        "android_client_info": {
+          "package_name": "com.example.flutter_getx_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLtWnFX-y2X0VdnyNbdAP1f_gST9p78ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

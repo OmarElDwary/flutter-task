@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_task/core/constants/app_colors.dart';
 import 'package:flutter_getx_task/core/constants/app_dimensions.dart';
+import 'package:flutter_getx_task/core/constants/app_text_styles.dart';
 import 'package:flutter_getx_task/core/widgets/labeled_text.dart';
-import 'package:flutter_getx_task/modules/profile/controllers/produle_controller.dart';
+import 'package:flutter_getx_task/core/widgets/menu_btn.dart';
+import 'package:flutter_getx_task/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_getx_task/modules/profile/views/profile/profile_widgets/profile_action.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +17,10 @@ class ProfileView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.kPrimaryColor,
         title: Text(
           "My Profile",
+          style: AppTextStyles.title.copyWith(color: AppColors.kSalmonColor),
         ),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.edit))],
       ),
@@ -35,12 +39,15 @@ class ProfileView extends StatelessWidget {
                   backgroundImage: NetworkImage(user.profileImage),
                   radius: AppDimensions.imagesRadius,
                 ),
-                Text(user.name),
-                LabeledText(label: "ID", value: user.id),
+                Text(
+                  user.name,
+                  style: AppTextStyles.title,
+                ),
+                LabeledText(label: "ID: ", value: user.id),
                 Container(
                   padding: AppDimensions.defaultPadding,
                   decoration: BoxDecoration(
-                      color: AppColors.kTerracottaColor,
+                      color: AppColors.kSalmonColor,
                       borderRadius:
                           BorderRadius.circular(AppDimensions.defaultRadius)),
                   child: Row(
@@ -50,17 +57,60 @@ class ProfileView extends StatelessWidget {
                           icon: Icons.person_2_outlined,
                           label: "Profile",
                           onTap: () => Get.to(() => ProfileView())),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 15,
+                        child: VerticalDivider(
+                            width: 20,
+                            thickness: 1,
+                            color: AppColors.kPrimaryColor),
+                      ),
                       ProfileAction(
                           icon: Icons.library_books_outlined,
                           label: "Wish list",
                           onTap: () => Get.to(() => ProfileView())),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 15,
+                        child: VerticalDivider(
+                            width: 20,
+                            thickness: 1,
+                            color: AppColors.kPrimaryColor),
+                      ),
                       ProfileAction(
                           icon: Icons.shopping_bag_outlined,
                           label: "Profile",
                           onTap: () => Get.to(() => ProfileView())),
                     ],
                   ),
-                )
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    MenuBtn(
+                        icon: Icons.key,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Privacy Policy"),
+                    MenuBtn(
+                        icon: Icons.credit_card_rounded,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Payment Methods"),
+                    MenuBtn(
+                        icon: Icons.notifications_outlined,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Notification"),
+                    MenuBtn(
+                        icon: Icons.settings_outlined,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Settings"),
+                    MenuBtn(
+                        icon: Icons.support_agent_sharp,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Help"),
+                    MenuBtn(
+                        icon: Icons.door_back_door_outlined,
+                        onTap: () => Get.to(() => ProfileView()),
+                        title: "Help"),
+                  ],
+                ),
               ],
             ),
           ),
