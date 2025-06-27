@@ -5,5 +5,5 @@ class AppDimensions {
   static const EdgeInsets contentPadding =
       EdgeInsets.symmetric(horizontal: 15, vertical: 5);
   static const double defaultRadius = 15;
-  static const double imagesRadius = 50;
+  static const double imagesRadius = 70;
 }

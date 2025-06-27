@@ -3,15 +3,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_getx_task/data/models/user_model.dart';
 import 'package:flutter_getx_task/data/services/user_service.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController {
   var user = Rxn<UserModel>();
   final _userService = UserService();
   final isLoading = true.obs;
+  final localImagePath = ''.obs;
+
+  Future<void> loadLocalProfileImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final path = prefs.getString('local_profile_image');
+    if (path != null) {
+      localImagePath.value = path;
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
     getUserData();
+    loadLocalProfileImage();
   }
 
   Future<void> getUserData() async {
@@ -35,6 +47,8 @@ class ProfileController extends GetxController {
       }
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = false;
     }
   }
 

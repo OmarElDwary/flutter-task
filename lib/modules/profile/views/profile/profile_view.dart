@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_task/core/constants/app_colors.dart';
 import 'package:flutter_getx_task/core/constants/app_dimensions.dart';
 import 'package:flutter_getx_task/core/constants/app_text_styles.dart';
 import 'package:flutter_getx_task/core/widgets/labeled_text.dart';
 import 'package:flutter_getx_task/core/widgets/menu_btn.dart';
+import 'package:flutter_getx_task/modules/edit-profile/views/edit-profile/edit_profile_view.dart';
 import 'package:flutter_getx_task/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_getx_task/modules/profile/views/profile/profile_widgets/profile_action.dart';
 import 'package:get/get.dart';
@@ -22,7 +25,13 @@ class ProfileView extends StatelessWidget {
           "My Profile",
           style: AppTextStyles.title.copyWith(color: AppColors.kSalmonColor),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.edit))],
+        actions: [
+          IconButton(
+              onPressed: () => Get.to(EditProfileView(
+                    user: controller.user.value!,
+                  )),
+              icon: Icon(Icons.edit))
+        ],
       ),
       body: Obx(() {
         final user = controller.user.value;
@@ -35,10 +44,18 @@ class ProfileView extends StatelessWidget {
             padding: AppDimensions.defaultPadding,
             child: Column(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user.profileImage),
-                  radius: AppDimensions.imagesRadius,
-                ),
+                Obx(() {
+                  final path = controller.localImagePath.value;
+                  final fallbackImage =
+                      controller.user.value?.profileImage ?? '';
+
+                  return CircleAvatar(
+                    radius: 60,
+                    backgroundImage: path.isNotEmpty
+                        ? FileImage(File(path))
+                        : NetworkImage(fallbackImage) as ImageProvider,
+                  );
+                }),
                 Text(
                   user.name,
                   style: AppTextStyles.title,
