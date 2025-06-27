@@ -7,6 +7,7 @@ import 'package:flutter_getx_task/core/constants/app_text_styles.dart';
 import 'package:flutter_getx_task/core/widgets/labeled_text.dart';
 import 'package:flutter_getx_task/core/widgets/menu_btn.dart';
 import 'package:flutter_getx_task/modules/edit-profile/views/edit-profile/edit_profile_view.dart';
+import 'package:flutter_getx_task/modules/orders/views/orders_view.dart';
 import 'package:flutter_getx_task/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_getx_task/modules/profile/views/profile/profile_widgets/profile_action.dart';
 import 'package:get/get.dart';
@@ -94,8 +95,8 @@ class ProfileView extends StatelessWidget {
                       ),
                       ProfileAction(
                           icon: Icons.shopping_bag_outlined,
-                          label: "Profile",
-                          onTap: () => Get.to(() => ProfileView())),
+                          label: "Orders",
+                          onTap: () => Get.to(() => OrdersView())),
                     ],
                   ),
                 ),
